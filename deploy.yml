@@ -29,3 +29,8 @@
       dest: /var/www/
       update: yes
       version: master
+
+  - name: start apache2
+    service:
+      name: apache2
+      state: started
