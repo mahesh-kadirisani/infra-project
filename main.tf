@@ -83,7 +83,7 @@ resource "aws_autoscaling_group" "asg" {
   desired_capacity = var.desiredcapacity
   health_check_type = "EC2"
   load_balancers = [aws_elb.elb.name]
-  availability_zones = ["us-west-1a"]
+  availability_zones = ["us-east-1a"]
 }
 
 
