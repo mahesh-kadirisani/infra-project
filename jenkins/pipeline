@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('clean') {
+            steps {
+                cleanWs()
+            }
+        }
+        stage('SCM') {
+            steps {
+                git branch: 'main', url: 'https://github.com/mahesh-kadirisani/infra-project.git'
+            }
+        }
+        stage('Terraform') {
+            steps {
+                
+                sh 'terraform init'
+                sh 'terraform plan'
+                sh 'terraform apply --auto-approve'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh 'ansible-playbook -i aws_ec2.yml deploy.yml'
+            }
+        }
+        
+    }
+}
