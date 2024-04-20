@@ -77,13 +77,13 @@ resource "aws_elb" "elb" {
 }
 
 resource "aws_autoscaling_group" "asg" {
-  launch_configuration = aws_launch_configuration.webservers.name
+  launch_configuration = aws_launch_configuration.webservers.id
   min_size = var.minsize
   max_size = var.maxsize
   desired_capacity = var.desiredcapacity
   health_check_type = "EC2"
   load_balancers = [aws_elb.elb.name]
-  availability_zones = ["us-east-1a"]
+  vpc_zone_identifier  = [aws_subnet.subnet.id]
 }
 
 
