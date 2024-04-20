@@ -84,6 +84,11 @@ resource "aws_autoscaling_group" "asg" {
   health_check_type = "EC2"
   load_balancers = [aws_elb.elb.name]
   vpc_zone_identifier  = [aws_subnet.subnet.id]
+  tag {
+    key                 = "Environment"
+    value               = var.env
+    propagate_at_launch = true
+  }
 }
 
 
